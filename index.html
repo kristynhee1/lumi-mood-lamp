@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lumi – the mood lamp that misunderstands you</title>
+
+  <!-- friendly rounded fonts, like the reference sites -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- room lighting: two see-through layers over the whole page.
+       script.js changes their opacity as the mood slider moves -->
+  <div id="darkness"></div>
+  <div id="brightness"></div>
+
+  <!-- decorative torn-paper shapes (pure CSS, see style.css) -->
+  <div class="paper paper-yellow"></div>
+  <div class="paper paper-blue"></div>
+  <div class="paper paper-green"></div>
+
+  <header class="nav">
+    <span class="logo">Lumi</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Meet Lumi.</h1>
+      <p class="tagline">A lamp that wants to help. It just doesn't always get you.</p>
+    </section>
+
+    <section class="layout">
+
+      <!-- ===== LEFT: the lamp ===== -->
+      <div class="stage-card" id="stageCard" data-state="neutral">
+        <div class="speech" id="speech">Hi. Tell me how you feel.</div>
+
+        <div class="lamp-wrap" id="lampWrap">
+          <div class="halo" id="halo"></div>
+
+          <!-- the acrylic heart (hover target) -->
+          <svg class="acrylic" id="acrylic" viewBox="0 0 200 200" aria-label="Lumi the lamp">
+            <defs>
+              <!-- wireframe grid like the 3D acrylic lamps -->
+              <pattern id="grid" width="13" height="13" patternUnits="userSpaceOnUse" patternTransform="rotate(18)">
+                <path d="M13 0H0V13" fill="none" class="grid-line"/>
+              </pattern>
+            </defs>
+            <path class="heart-fill" d="M100 175 C20 120 15 55 60 40 C85 32 100 50 100 62 C100 50 115 32 140 40 C185 55 180 120 100 175 Z"/>
+            <path class="heart-outline" d="M100 175 C20 120 15 55 60 40 C85 32 100 50 100 62 C100 50 115 32 140 40 C185 55 180 120 100 175 Z"/>
+            <!-- smaller inner heart for that layered 3D look -->
+            <path class="heart-inner" d="M100 140 C55 108 52 74 72 66 C86 61 97 71 100 80 C103 71 114 61 128 66 C148 74 145 108 100 140 Z"/>
+          </svg>
+
+          <!-- dark base with a little face -->
+          <div class="base">
+            <div class="eyes">
+              <div class="eye"><div class="pupil"></div><div class="lid"></div></div>
+              <div class="eye"><div class="pupil"></div><div class="lid"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hint" id="hint"></div>
+      </div>
+
+      <!-- ===== RIGHT: the controls ===== -->
+      <div class="panel">
+
+        <div class="card">
+          <label for="moodDial">Your mood <span class="badge" id="moodLabel">50</span></label>
+          <input type="range" id="moodDial" min="0" max="100" value="50">
+          <div class="scale"><span>low</span><span>high</span></div>
+        </div>
+
+        <div class="card">
+          <label class="toggle">
+            <input type="checkbox" id="coffee">
+            <span class="box"></span>
+            I had coffee
+          </label>
+        </div>
+
+        <div class="card">
+          <label for="timeSelect">Time of day</label>
+          <select id="timeSelect">
+            <option value="morning">Morning</option>
+            <option value="afternoon" selected>Afternoon</option>
+            <option value="night">Night</option>
+          </select>
+        </div>
+
+        <div class="card note">
+          <strong>One more thing:</strong> try hovering over the lamp.
+        </div>
+
+        <div class="card debug">
+          <strong>Inside Lumi's head</strong>
+          <code id="debug"></code>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== mood calendar: hover a day to see its record ===== -->
+    <section class="calendar-section">
+      <h2 id="calTitle">Mood calendar</h2>
+      <p class="cal-sub">Every day Lumi keeps a little record. Hover a day to read it.</p>
+      <div class="cal-card">
+        <div class="cal-grid" id="calendar"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
